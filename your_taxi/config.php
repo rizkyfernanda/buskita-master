@@ -6,7 +6,7 @@
 $databaseHost = 'localhost';
 $databaseUsername = 'root';
 $databasePassword = '';
-$databaseName = 'pesanbus';
+$databaseName = 'pesanbus2';
 
  
 $mysqli = mysqli_connect($databaseHost, $databaseUsername,$databasePassword,$databaseName); 

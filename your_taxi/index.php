@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php include_once("add.php"); ?>
 <html lang="en">
 	<head>
 		<title>Home</title>
@@ -66,7 +67,7 @@
 									<li><a href="index_1.html">About</a></li>
 									<li><a href="index_2.html">Bus</a></li>
 									<li><a href="index_3.html">Services</a></li>
-									<li><a href="index_4.html">Contacts</a></li>
+									<li><a href="index_4.php">Contacts</a></li>
 								</ul>
 							</nav>
 							<div class="clear"></div>
@@ -137,38 +138,44 @@
 						<form id="bookingForm">
 							<div class="fl1">
 								<div class="tmInput">
-									<input name="from" type="text" placeholder="From" data-constraints="@NotEmpty @Required ">
+									<input name="Name" placeHolder="Name:" type="text" data-constraints='@NotEmpty @Required @AlphaSpecial'>
+								</div>
+								<div class="tmInput">
+									<input name="From" placeHolder="From:" type="text" data-constraints="@NotEmpty @Required ">
 								</div>
 							</div>
 							<div class="fl1">
+								<div class="tmInput">
+									<input name="Email" placeHolder="Email:" type="text" data-constraints="@NotEmpty @Required @Email">
+								</div>
 								<div class="tmInput mr0">
-									<input name="to" type="text" placeholder="To" data-constraints="@NotEmpty @Required">
+									<input name="To" placeHolder="To:" type="text" data-constraints="@NotEmpty @Required">
 								</div>
 							</div>
 							<div class="clear"></div>
 							<strong>Time</strong>
 							<div class="tmInput">
-								<input name="time" type="time" data-constraints="@NotEmpty @Required">
+								<input name="Time" placeHolder="" type="time" data-constraints="@NotEmpty @Required">
 							</div>
 							<div class="clear"></div>
 							<strong>Date</strong>
 							<label class="tmDatepicker">
-								<input name="date" type="text" placeholder="Insert Date" data-constraints="@NotEmpty @Required @Date">
+								<input type="text" name="Date"	placeHolder='20/05/2014' data-constraints="@NotEmpty @Required @Date">
 							</label>
 							<div class="clear"></div>
 							<div class="tmRadio">
 								<p>Comfort</p>
-								<input name="comfort" type="radio" id="tmRadio0" data-constraints='@RadioGroupChecked(name="Comfort", groups=[RadioGroup])' value="cheap" checked/>
+								<input name="Comfort" type="radio" id="tmRadio0" data-constraints='@RadioGroupChecked(name="Comfort", groups=[RadioGroup])' checked/>
 								<span>Cheap</span>
-								<input name="comfort" type="radio" id="tmRadio1" data-constraints='@RadioGroupChecked(name="Comfort", groups=[RadioGroup])' value="standard" />
-								<span>Standard</span>
-								<input name="comfort" type="radio" id="tmRadio2" data-constraints='@RadioGroupChecked(name="Comfort", groups=[RadioGroup])' value="lux" />
+								<input name="Comfort" type="radio" id="tmRadio1" data-constraints='@RadioGroupChecked(name="Comfort", groups=[RadioGroup])' />
+								<span>Standart</span>
+								<input name="Comfort" type="radio" id="tmRadio2" data-constraints='@RadioGroupChecked(name="Comfort", groups=[RadioGroup])' />
 								<span>Lux</span>
 							</div>
 							<div class="clear"></div>
 							<div class="fl1 fl2">
 								<em>Adults</em>
-								<select name="adults" class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
+								<select name="Adults" class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
 									<option>1</option>
 									<option>1</option>
 									<option>2</option>
@@ -178,7 +185,7 @@
 							</div>
 							<div class="fl1 fl2">
 								<em>Children</em>
-								<select name="children" class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
+								<select name="Children" class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
 									<option>0</option>
 									<option>0</option>
 									<option>1</option>
@@ -187,13 +194,13 @@
 							</div>
 							<div class="clear"></div>
 							<div class="tmTextarea">
-								<textarea name="Message" placeHolder="Message" data-constraints='@NotEmpty @Required @Length(min=20,max=999999)'></textarea>
+								<textarea name="Message" placeHolder="Message" data-constraints=''></textarea>
 							</div>
-							<input type="submit" name="submit">
-					</form>
+							<a href="#" class="btn" name="Submit" data-type="submit">Submit</a>
+						</form>
 					</div>
 					<div class="grid_6 prefix_1">
-						<a href="index2.html" class="type"><img src="gambar/form1.jpg" alt=""><span class="type_caption">Cheap</span></a>
+						<a href="index2.html" class="type"><img src="gambar/form1.jpg" alt=""><span class="type_caption">Economy</span></a>
 						<a href="index2.html" class="type"><img src="gambar/form2.jpg" alt=""><span class="type_caption">Standard</span></a>
 						<a href="index2.html" class="type"><img src="gambar/form3.jpg" alt=""><span class="type_caption">Lux</span></a>
 					</div>
@@ -201,23 +208,6 @@
 				</div>
 			</div>
 		</div>
-		<?php
-		if(isset($_POST['submit'])) {
-		$from = $_POST['from'];
-		$to = $_POST['to'];
-		$time = $_POST['time'];
-		$date = $_POST['date'];
-		$comfort = $_POST['comfort'];
-		$adults = $_POST['adults'];
-		$children = $_POST['children'];
-		$message = $_POST['message'];
-	
-
-		include_once("config.php");
-		$result = mysqli_query($mysqli, 
-			"INSERT INTO pesanbus('from', to, 'time', 'date', comfort, adults, children, message, id_pesan, id_user) VALUES('$from', '$to', '$time', '$date', '$comfort', '$adults', '$children', '$message', 2, 1);");
-		}
-		?>
 <!--==============================footer=================================-->
 		<footer>
 			<div class="container_12">
@@ -247,7 +237,5 @@
 				$('#bookingForm input, #bookingForm textarea').placeholder();
 			});
 		</script>
-
 	</body>
 </html>
-
